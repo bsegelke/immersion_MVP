@@ -1,0 +1,20 @@
+{
+  "name": "mvp",
+  "version": "1.0.0",
+  "description": "MVP project",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bsegelke/immersion_MVP.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/bsegelke/immersion_MVP/issues"
+  },
+  "homepage": "https://github.com/bsegelke/immersion_MVP#readme"
+}
