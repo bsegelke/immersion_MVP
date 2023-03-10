@@ -17,6 +17,19 @@ module.exports = {
       directory: path.join(__dirname, "build"),
     },
     port: 3000,
+  },
+  module:{
+    rules: [
+      {
+        test: /\.(js)$/,
+        exclude: /node_modules/,
+        use: ['babel-loader'],
+      },
+    ],
+  },
+
+  resolve: {
+    extensions: ['*', ".js"],
   }
 
 };
