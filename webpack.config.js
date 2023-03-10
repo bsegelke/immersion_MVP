@@ -18,18 +18,20 @@ module.exports = {
     },
     port: 3000,
   },
-  module:{
+  
+  module: {
+    // exclude node_modules
     rules: [
       {
-        test: /\.(js)$/,
+        test: /\.(js|jsx)$/,         // <-- added `|jsx` here
         exclude: /node_modules/,
-        use: ['babel-loader'],
+        use: ["babel-loader"],
       },
     ],
   },
-
+  // pass all js files through Babel
   resolve: {
-    extensions: ['*', ".js"],
-  }
+    extensions: ["*", ".js", ".jsx"],    // <-- added `.jsx` here
+  },
 
 };
