@@ -44,5 +44,6 @@ const MonsterFeederSchema = new mongoose.Schema({
 
 
 module.exports = {
-  saveMonsterToDatabase
+  saveMonsterToDatabase,
+  Monster
 };

@@ -4,18 +4,19 @@ const path = require('path');
 const bodyParser = require('body-parser')
 //import { midjourney } from midjourney-client
 const  {saveMonsterToDatabase } = require('./db')
+const { Monster } = require('./db')
 const PORT = 3000;
 const app = express();
 
+app.use(bodyParser.json({limit: '50mb'}));
+app.use(bodyParser.urlencoded({limit: '50mb', extended: true}));
 // Serve static assets from the "public" directory
 app.use(express.static(path.join(__dirname, '..', 'build')));
-app.use(bodyParser.json())
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
+
 // Route all other requests to your React application
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, '..', 'build', 'index.html'));
-});
+// app.get('*', (req, res) => {
+//   res.sendFile(path.join(__dirname, '..', 'build', 'index.html'));
+// });
 
 app.listen(PORT, () => {
   
@@ -34,6 +35,17 @@ app.post("/api/save-monster", async (req, res) => {
   }
 });
 
+
+app.get("/api/save-monster/:username", async(req,res)=>{
+  const username = req.params.username;
+  console.log('username', username)
+  const user = await Monster.findOne({ username })
+  if(user){
+    const imageBuffer = Buffer.from(user.monster_image, 'base64');
+    res.setHeader('Content-Type', 'image/jpeg');
+    res.send(imageBuffer).status(200)
+  }
+})
 
 
 console.log('test')
