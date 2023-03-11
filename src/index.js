@@ -8,11 +8,11 @@ while(userName.toLowerCase() === "") {
   alert("We have to know your name, stranger!");
   userName = prompt("Hello, Monster Feeder, Whats Your Name?");
 }
-  let monsterStyle = prompt(`Howdy${userName}, what kinda monster do you want to feed today?`)
+  let monsterStyle = prompt(`Howdy ${userName}!, what kinda monster do you want to feed today?`)
   console.log(userName, monsterStyle)
 
 
 
 const container = document.getElementById("root");
 const root = createRoot(container);
-root.render(<App />);
+root.render(<App userName = {userName} monsterStyle={monsterStyle}/>);

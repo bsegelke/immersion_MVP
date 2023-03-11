@@ -21,12 +21,14 @@ this.generateImage = this.generateImage.bind(this);
 
 };
 
-async generateImage() {
 
+
+async generateImage() {
+  const { monsterStyle } = this.props
   var prompt = document.getElementById("prompt").value;
 
   const encodedParams = new URLSearchParams();
-  encodedParams.append("prompt", `${prompt}, full body monster, highly-detailed masterpiece trending HQ,  in the style of GooseBumps`);
+  encodedParams.append("prompt", `${monsterStyle}, full body monster, highly-detailed masterpiece trending HQ,  in the style of GooseBumps`);
   encodedParams.append("width", '320');
   encodedParams.append("height", '320');
   encodedParams.append("negative_prompt","background,tiling, poorly drawn hands, poorly drawn feet, poorly drawn face, out of frame, extra limbs, disfigured, deformed, body out of frame, blurry, bad anatomy, blurred, watermark, grainy, signature, cut off, draft, human, landscape" )
