@@ -1,6 +1,7 @@
 
 import React from "react";
 //import midjourney from "midjourney-client";
+import { API_KEY } from "../config"
 import axios from "axios";
 // const App = () => <h1>Welcome to Monster Feeder Yo mama!!</h1>;
 
@@ -11,17 +12,38 @@ constructor(props){
   super(props);
 
 this.state = {
+imageSrc: '',
 
 }
 
 
-this.imageGenerator = this.imageGenerator.bind(this);
+this.generateImage = this.generateImage.bind(this);
 
 };
 
+async generateImage() {
 
-imageGenerator(prompt) {
-  console.log('hi')
+  var prompt = document.getElementById("prompt").value;
+
+  const encodedParams = new URLSearchParams();
+  encodedParams.append("prompt", prompt);
+
+  const options = {
+      method: 'POST',
+      headers: {
+          'content-type': 'application/x-www-form-urlencoded',
+          'X-RapidAPI-Key': API_KEY,
+          'X-RapidAPI-Host': 'dezgo.p.rapidapi.com'
+      },
+      body: encodedParams
+  };
+
+  var response = await fetch('https://dezgo.p.rapidapi.com/text2image', options)
+  var pngBlob = await response.blob();    
+  
+  console.log("Got the image as a blob:", pngBlob)
+  this.setState({imageSrc: URL.createObjectURL(pngBlob)})
+  //document.getElementById("my-image").src = URL.createObjectURL(pngBlob);
 }
 
 
@@ -33,7 +55,7 @@ return (
 <input type="text" id="prompt" />
 <button onClick={this.generateImage}>Create Your Monster</button>
 <hr/>
-<img id="my-image"/>
+<img src={this.state.imageSrc} id="my-image"/>
 </div>
 )
 
