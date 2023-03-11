@@ -44,7 +44,10 @@ app.get("/api/save-monster/:username", async(req,res)=>{
     const imageBuffer = Buffer.from(user.monster_image, 'base64');
     res.setHeader('Content-Type', 'image/jpeg');
     res.send(imageBuffer).status(200)
+  }else{
+    res.send('new guy aye').sendStatus(200)
   }
+
 })
 
 
