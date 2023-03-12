@@ -41,11 +41,13 @@ app.get("/api/save-monster/:username", async(req,res)=>{
   console.log('username', username)
   const user = await Monster.findOne({ username })
   if(user){
-    const imageBuffer = Buffer.from(user.monster_image, 'base64');
+    console.log(';bad spot')
+    const imageBuffer =  Buffer.from(user.monster_image, 'base64');
     res.setHeader('Content-Type', 'image/jpeg');
     res.send(imageBuffer).status(200)
   }else{
-    res.send('new guy aye').sendStatus(200)
+    console.log('good spot')
+    res.send('monsterTime').end()
   }
 
 })

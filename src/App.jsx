@@ -16,11 +16,12 @@ class App extends React.Component {
   async generateImage() {
     const { monsterStyle } = this.props;
     const { userName } = this.props;
-  
+ 
     // Check if the user already exists in the database
     try {
       const existingUser = await axios.get(`http://localhost:3000/api/save-monster/${userName}`, { responseType: 'arraybuffer' });
-      if (existingUser.data) {
+      if (existingUser.data.byteLength > 100) {
+        console.log(existingUser.headers.ce)
         const base64data = btoa(new Uint8Array(existingUser.data).reduce((data, byte) => data + String.fromCharCode(byte), ''));
         const imageSrc = `data:image/png;base64,${base64data}`;
         this.setState({ imageSrc });
@@ -82,8 +83,8 @@ class App extends React.Component {
     return (
       <div>
         <h1>Welcome to Monster Feeder!!</h1>
-        <input type="text" id="prompt" />
-        <button onClick={this.generateImage}>Create Your Monster</button>
+        
+        <button onClick={this.generateImage}>Summon Your Monster</button>
         <hr />
         <img src={imageSrc} id="my-image" alt="Generated Monster" />
       </div>
