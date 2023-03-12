@@ -2,6 +2,7 @@ import React from "react";
 import { createRoot } from "react-dom/client";
 import App from "./App.jsx";
 import axios from "axios";
+import '../public/style.css';
 
 async function getUserInfo() {
   let userName = prompt("Hello, Monster Feeder, What's Your Name?");

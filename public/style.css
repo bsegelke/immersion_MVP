@@ -1,0 +1,15 @@
+body {
+  background-color: rgb(5, 169, 30);
+}
+
+h1 {
+  color: rgb(231, 54, 225);
+  margin-left: 20px;
+}
+
+button{
+  background-color: rgb(191, 59, 59);
+  font-size: larger;
+  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+  color: rgb(251, 188, 41);
+}
