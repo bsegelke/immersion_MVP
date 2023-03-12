@@ -7,7 +7,12 @@ const  {saveMonsterToDatabase } = require('./db')
 const { Monster } = require('./db')
 const PORT = 3000;
 const app = express();
-
+app.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*"); // Allow requests from any origin
+  res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE"); // Allow the following HTTP methods
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept"); // Allow the following headers
+  next();
+});
 app.use(bodyParser.json({limit: '50mb'}));
 app.use(bodyParser.urlencoded({limit: '50mb', extended: true}));
 // Serve static assets from the "public" directory

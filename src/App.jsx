@@ -1,8 +1,7 @@
 import React from "react";
 import { API_KEY } from "../config";
 import axios from "axios";
-import { Buffer } from 'buffer';
-import Timer from './Timer'
+import Timer from "./Timer";
 
 
 class App extends React.Component {
@@ -83,7 +82,7 @@ class App extends React.Component {
     const { imageSrc } = this.state
     return (
       <div>
-        <Timer ></Timer>
+      <Timer></Timer>
         <h1>Welcome to Monster Feeder!!</h1>
         
         <button onClick={this.generateImage}>Summon Your Monster</button>
