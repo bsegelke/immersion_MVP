@@ -9,17 +9,80 @@ body {
 h1 {
   color: rgb(231, 54, 225);
   font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
-  margin-left: 20px;
+  display: flex;
   justify-content: center;
   align-items: center;
+  margin: 20px auto;
+  font-size: 100px;
+ 
+ 
+  padding: 10px;
+  text-shadow:
+  0 0 1px rgb(231, 54, 225),
+  0 0 2px rgb(231, 54, 225),
+
+  0 0 9px rgb(231, 54, 225),
+
+  0 0 30px rgba(231, 54, 225, 0.5),
+  0 0 40px rgba(231, 54, 225, 0.5);
+  opacity: 80;
+}
+  
+#timer{
+  font-size: 36px;
+  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 20px auto;
+  padding-top: 20px;
+  color: rgb(244, 0, 166);
 }
 
-button{
-  background-color: rgb(191, 59, 59);
-  font-size: larger;
+#summonbutton{
+  background-color: rgb(231, 54, 225, 0.8);
+  font-size: 36px;
   font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
-  color: rgb(251, 188, 41);
+  border-radius: 10px;
+  color: rgb(24, 97, 21,0.8);
+  
+  box-shadow: 0 30px 40px -20px rgba(0, 0, 0, 0.4);
+  transition: transform 0.2s ease-out, box-shadow 0.2s ease-out;
+
 }
+#summonbutton:hover {
+  transform: scale(1.05);
+  box-shadow: 0 50px 60px -30px rgba(0, 0, 0, 0.6);
+}
+
+
+#feedbutton{
+  background-color: rgb(223, 72, 35);
+  font-size: 36px;
+  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+  border-radius: 10px;
+  color: rgb(243, 175, 28);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 20px auto;
+
+ 
+ 
+  padding: 10px;
+  box-shadow: 0 30px 40px -20px rgba(0, 0, 0, 0.4);
+  transition: transform 0.2s ease-out, box-shadow 0.2s ease-out;
+
+}
+#feedbutton:hover {
+  transform: scale(1.05);
+  box-shadow: 0 50px 60px -30px rgba(0, 0, 0, 0.6);
+}
+
+
+
+
 
 #my-image {
   transform:
@@ -28,8 +91,8 @@ button{
     rotateX(27deg)
     scale(1.5, 1.5);
   border-radius: 20px;
-  border: 5px solid #e6e6e6;
-  box-shadow: 0 70px 40px -20px rgba(0, 0, 0, 0.2);
+  /* border: 5px solid #e6e6e6; */
+  box-shadow: 0 30px 40px -20px rgba(0, 0, 0, 0.9);
   transition: 0.4s ease-in-out transform;
 }
 
@@ -38,8 +101,9 @@ button{
 }
 
 #imageborder {
-  background-color: rgb(12, 208, 54);
-  border: 8px solid rgb(205, 12, 205);
+  background-color: rgb(12, 208, 54, 0.8);
+  border: 8px solid rgb(205, 12, 205, 0.8);
+  opacity: 50%;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -49,8 +113,15 @@ button{
   width: 400px;
   height: 500px;
   box-shadow:
-    2em 4em 6em -2em rgba(14, 212, 67, 0.975),
-    1em 2em 3.5em -2.5em rgba(46, 219, 15, 0.883);
+
+  0 0 1px rgb(231, 54, 225),
+  0 0 2px rgb(231, 54, 225),
+
+  0 0 9px rgb(231, 54, 225),
+
+  0 0 30px rgba(231, 54, 225, 0.5),
+  0 0 40px rgba(231, 54, 225, 0.5);
+  opacity: 80;
     transform:
     perspective(500px)
     translate3d(0px, 0px, -250px)

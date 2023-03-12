@@ -56,9 +56,9 @@ class Timer extends React.Component {
 
   render() {
     return (
-      <div>
-        Time Before Monster Dies <span id="timer">{this.state.time}</span>
-        <button onClick={(this.reset)}>Feed Monster</button>
+      <div id="#timer">
+        <span id="timer">{this.state.time}</span>
+        <button id="feedbutton" onClick={(this.reset)}>Feed Monster</button>
       </div>
     );
   }

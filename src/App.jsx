@@ -84,16 +84,17 @@ class App extends React.Component {
     const { isButtonClicked } = this.state
     return (
       <div>
-      <Timer></Timer>
-        <h1>Welcome to Monster Feeder!!</h1>
+      
+        <h1>Welcome to Monster Feeder</h1>
         
        
         <div id="imageborder">
         {isButtonClicked ? null : (
-            <button onClick={this.generateImage}>Summon Your Monster</button>
+            <button id="summonbutton" onClick={this.generateImage}>Summon Your Monster</button>
           )}
         <img src={imageSrc} id="my-image"/>
         </div>
+        <Timer></Timer>
       </div>
     );
   }
