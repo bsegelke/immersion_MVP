@@ -42,8 +42,22 @@ const MonsterFeederSchema = new mongoose.Schema({
   }
 }
 
+async function monsterDeath(monsterData) {
+try{
+  const reponse = await axios.put('/api/monster', {
+    username: monsterData.username,
+    alive: false
+  })
+  console.log('Monster Status Updated')
+}catch(err){
+  console.log('failed to update monster', err)
+}
+}
+
+
 
 module.exports = {
   saveMonsterToDatabase,
+  monsterDeath,
   Monster
 };
