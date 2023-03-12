@@ -4,6 +4,7 @@ import axios from "axios";
 import Timer from "./Timer";
 
 
+
 class App extends React.Component {
   constructor(props) {
     super(props);
@@ -82,6 +83,7 @@ class App extends React.Component {
   render() {
     const { imageSrc } = this.state
     const { isButtonClicked } = this.state
+    const { userName } = this.props
     return (
       <div>
       
@@ -94,7 +96,7 @@ class App extends React.Component {
           )}
         <img src={imageSrc} id="my-image"/>
         </div>
-        <Timer></Timer>
+        <Timer userName={userName}></Timer>
       </div>
     );
   }

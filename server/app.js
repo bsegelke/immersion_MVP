@@ -58,4 +58,18 @@ app.get("/api/save-monster/:username", async(req,res)=>{
 })
 
 
+app.put("/api/monster", async (req, res)=>{
+  // console.log(req)
+  const { username, alive } = req.body;
+  console.log(req.body)
+  try{
+  const updatedMonster = await Monster.findOneAndUpdate({ username }, { alive: alive }, { new: true });
+  console.log('updated a success!', updatedMonster)
+  res.json(updatedMonster)
+  }catch(err){
+    console.log('failed to update monster to dead', err);
+    res.sendStatus(500)
+  }
+})
+
 console.log('test')

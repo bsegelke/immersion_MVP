@@ -1,4 +1,5 @@
 import React from "react";
+import axios from "axios";
 
 class Timer extends React.Component {
   constructor(props) {
@@ -6,12 +7,35 @@ class Timer extends React.Component {
     this.state = {
       time: 0,
     };
+
+
+    this.monsterDeath=this.monsterDeath.bind(this)
   }
 
+
+  async monsterDeath(monsterData) {
+    try{
+      const reponse = await axios.put('/api/monster', {
+        username: monsterData,
+        alive: false
+       
+      })
+      // console.log('Monster Status Updated')
+    }catch(err){
+      console.log('failed to update monster', err)
+    }
+    }
+
+
+
   //when timer is on the dom update the timer 
-  componentDidMount() {
-    this.updateTimer();
-  }
+ 
+    componentDidMount() {
+      const endTime = new Date().getTime() + 30000;
+      localStorage.setItem("endTime", endTime);
+      this.updateTimer();
+    }
+  
 //when the timer changes, update the timer
   componentDidUpdate() {
     this.updateTimer();
@@ -43,16 +67,31 @@ class Timer extends React.Component {
         }
       }, 100);
     } else {
-      this.reset();
+      this.monsterDeath(this.props.userName)
     }
   }
 //reset to 30 seconds
-  reset = () => {
-    const endTime = new Date().getTime() + 30000;
+reset = () => {
+  const endTime = localStorage.getItem("endTime");
+  if (endTime && new Date().getTime() < parseInt(endTime, 10)) {
+    // Timer has not expired yet
     this.setState({ time: 30 });
-
-    localStorage.setItem("endTime", endTime);
-  };
+  } else {
+    // Timer has expired, update alive status to false
+    axios.put('/api/monster', {
+      username: this.props.userName,
+      alive: true
+    })
+    .then(response => {
+      console.log('Monster Status Updated')
+    })
+    .catch(err => {
+      console.log('failed to update monster', err)
+    })
+    this.setState({ time: 30 });
+  }
+  localStorage.setItem("endTime", new Date().getTime() + 30000);
+};
 
   render() {
     return (
