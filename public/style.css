@@ -1,10 +1,17 @@
 body {
-  background-color: rgb(5, 169, 30);
+  background-image: url("https://media.giphy.com/media/xT9Igqq02d80wIqUpy/giphy.gif");
+
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
 }
 
 h1 {
   color: rgb(231, 54, 225);
+  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
   margin-left: 20px;
+  justify-content: center;
+  align-items: center;
 }
 
 button{
@@ -13,3 +20,45 @@ button{
   font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
   color: rgb(251, 188, 41);
 }
+
+#my-image {
+  transform:
+    perspective(750px)
+    translate3d(0px, 0px, -250px)
+    rotateX(27deg)
+    scale(1.5, 1.5);
+  border-radius: 20px;
+  border: 5px solid #e6e6e6;
+  box-shadow: 0 70px 40px -20px rgba(0, 0, 0, 0.2);
+  transition: 0.4s ease-in-out transform;
+}
+
+#my-image:hover {
+  transform: translate3d(0px, 0px, -250px);
+}
+
+#imageborder {
+  background-color: rgb(12, 208, 54);
+  border: 8px solid rgb(205, 12, 205);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 20px auto;
+  border-radius: 20px;
+  padding: 10px;
+  width: 400px;
+  height: 500px;
+  box-shadow:
+    2em 4em 6em -2em rgba(14, 212, 67, 0.975),
+    1em 2em 3.5em -2.5em rgba(46, 219, 15, 0.883);
+    transform:
+    perspective(500px)
+    translate3d(0px, 0px, -250px)
+    rotateX(10deg)
+    scale(1.5, 1.5);
+}
+/* #imageborder:hover {
+  transform:
+      rotate3d(0,0,0,0deg)
+      rotate(0deg);
+  } */

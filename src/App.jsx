@@ -9,6 +9,7 @@ class App extends React.Component {
     super(props);
     this.state = {
       imageSrc: '',
+      isButtonClicked: false
     };
     this.generateImage = this.generateImage.bind(this);
   }
@@ -16,7 +17,7 @@ class App extends React.Component {
   async generateImage() {
     const { monsterStyle } = this.props;
     const { userName } = this.props;
- 
+    this.setState({isButtonClicked: true})
     // Check if the user already exists in the database
     try {
       const existingUser = await axios.get(`http://localhost:3000/api/save-monster/${userName}`, { responseType: 'arraybuffer' });
@@ -80,15 +81,19 @@ class App extends React.Component {
 
   render() {
     const { imageSrc } = this.state
+    const { isButtonClicked } = this.state
     return (
       <div>
       <Timer></Timer>
         <h1>Welcome to Monster Feeder!!</h1>
         
-        <button onClick={this.generateImage}>Summon Your Monster</button>
-        <hr />
-        <img src={imageSrc} id="my-image" alt="Generated Monster" />
-        
+       
+        <div id="imageborder">
+        {isButtonClicked ? null : (
+            <button onClick={this.generateImage}>Summon Your Monster</button>
+          )}
+        <img src={imageSrc} id="my-image"/>
+        </div>
       </div>
     );
   }
