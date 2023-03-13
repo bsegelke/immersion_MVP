@@ -12,33 +12,49 @@ class App extends React.Component {
     this.state = {
       imageSrc: '',
       isButtonClicked: false,
-      alive: null
+      alive: true
     };
     this.generateImage = this.generateImage.bind(this);
+    this.setAlive = this.setAlive.bind(this)
+   
   }
+
+async setAlive(){
+  const { userName } = this.props;
+  try {
+    const existingUser = await axios.get(`http://localhost:3000/api/save-monster/${userName}`, { responseType: 'arraybuffer' });
+    if (existingUser.data.byteLength > 100) {
+      const response = await axios.get(`http://localhost:3000/api/living-status/${userName}`)
+        const monster = response.data
+        console.log('hello', monster)
+        this.setState({alive: monster})
+      
+    }
+  } catch (error) {
+    console.log('Error occurred while checking for existing user', error);
+  }
+  
+}
+componentDidMount() {
+  this.setAlive();
+}
 
   async generateImage() {
     const { monsterStyle } = this.props;
     const { userName } = this.props;
     this.setState({isButtonClicked: true})
- 
+    // await this.setAlive()
     try {
       const existingUser = await axios.get(`http://localhost:3000/api/save-monster/${userName}`, { responseType: 'arraybuffer' });
       if (existingUser.data.byteLength > 100) {
-        console.log(existingUser.headers.ce)
-        const base64data = btoa(new Uint8Array(existingUser.data).reduce((data, byte) => data + String.fromCharCode(byte), ''));
-        const imageSrc = `data:image/png;base64,${base64data}`;
-        this.setState({ imageSrc }, async () => {
-          const response = await axios.get(`http://localhost:3000/api/living-status/${userName}`)
-          const monster = response.data
-          console.log('hello', monster)
-          this.setState({alive: monster}, async ()=> {
-          if(this.state.alive === false){
-            this.setState({imgSrc: "https://media.giphy.com/media/jq0OxVeZObXBDltWKO/giphy-downsized-large.gif" })
-          }
-        })
-        });
+      
+            console.log(existingUser.headers.ce)
+            const base64data = btoa(new Uint8Array(existingUser.data).reduce((data, byte) => data + String.fromCharCode(byte), ''));
+            const imageSrc = `data:image/png;base64,${base64data}`;
+            this.setState({ imageSrc });
+
         return;
+          
       }
     } catch (error) {
       console.log('Error occurred while checking for existing user', error);
@@ -111,16 +127,22 @@ class App extends React.Component {
               Summon Your Monster
             </button>
           )}
-          <img
-  src={imageSrc}
-  id="my-image"
-/>
+          {alive ? (
+            <img
+              src={imageSrc}
+              id="my-image"
+            />
+          ) : (
+            <img
+              src="https://media.giphy.com/media/jq0OxVeZObXBDltWKO/giphy-downsized-large.gif"
+              id="my-image"
+            />
+          )}
         </div>
         <Timer userName={userName} />
       </div>
     );
   }
-
 
 }
 
