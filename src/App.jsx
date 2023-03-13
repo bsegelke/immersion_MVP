@@ -118,6 +118,22 @@ componentDidMount() {
     const { imageSrc, isButtonClicked, alive } = this.state;
     const { userName } = this.props;
     console.log('test', this.state)
+  
+    // If alive is false, don't render the button
+    if (!alive) {
+      return (
+        <div>
+          <h1 id='deadalert'>YOUR MONSTER DIED!!!!</h1>
+          <img
+            src="https://media.giphy.com/media/jq0OxVeZObXBDltWKO/giphy-downsized-large.gif"
+            id="deadimage"
+          />
+          <Timer userName={userName} />
+        </div>
+      );
+    }
+  
+    // Render the button and image if alive is true
     return (
       <div>
         <h1>Welcome to Monster Feeder</h1>
@@ -127,17 +143,7 @@ componentDidMount() {
               Summon Your Monster
             </button>
           )}
-          {alive ? (
-            <img
-              src={imageSrc}
-              id="my-image"
-            />
-          ) : (
-            <img
-              src="https://media.giphy.com/media/jq0OxVeZObXBDltWKO/giphy-downsized-large.gif"
-              id="my-image"
-            />
-          )}
+          <img src={imageSrc} id="my-image" />
         </div>
         <Timer userName={userName} />
       </div>
