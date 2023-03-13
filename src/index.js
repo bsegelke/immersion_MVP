@@ -4,6 +4,7 @@ import App from "./App.jsx";
 import axios from "axios";
 import '../public/style.css';
 
+
 async function getUserInfo() {
   let userName = prompt("Hello, Monster Feeder, What's Your Name?");
   let monsterStyle;
@@ -28,7 +29,7 @@ async function renderApp() {
   const { userName, monsterStyle } = await getUserInfo();
   const container = document.getElementById("root");
   const root = createRoot(container);
-  root.render(<App userName={userName} monsterStyle={monsterStyle} />);
+  root.render(<App userName={userName} monsterStyle={monsterStyle}  />);
 }
 
 renderApp();

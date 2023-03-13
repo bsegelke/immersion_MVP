@@ -72,4 +72,18 @@ app.put("/api/monster", async (req, res)=>{
   }
 })
 
+
+app.get('/api/living-status/:username', async(req,res)=>{
+  const { username } = req.params
+  try{
+const monster = await Monster.findOne({ username });
+if(!monster){
+  return res.sendDate(404)
+}
+console.log('sending living status to client')
+return res.json(monster.alive)
+  }catch(err){
+    console.log('could not get the monster living status')
+  }
+})
 console.log('test')

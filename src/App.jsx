@@ -5,12 +5,14 @@ import Timer from "./Timer";
 
 
 
+
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       imageSrc: '',
-      isButtonClicked: false
+      isButtonClicked: false,
+      alive: null
     };
     this.generateImage = this.generateImage.bind(this);
   }
@@ -19,20 +21,30 @@ class App extends React.Component {
     const { monsterStyle } = this.props;
     const { userName } = this.props;
     this.setState({isButtonClicked: true})
-    // Check if the user already exists in the database
+ 
     try {
       const existingUser = await axios.get(`http://localhost:3000/api/save-monster/${userName}`, { responseType: 'arraybuffer' });
       if (existingUser.data.byteLength > 100) {
         console.log(existingUser.headers.ce)
         const base64data = btoa(new Uint8Array(existingUser.data).reduce((data, byte) => data + String.fromCharCode(byte), ''));
         const imageSrc = `data:image/png;base64,${base64data}`;
-        this.setState({ imageSrc });
+        this.setState({ imageSrc }, async () => {
+          const response = await axios.get(`http://localhost:3000/api/living-status/${userName}`)
+          const monster = response.data
+          console.log('hello', monster)
+          this.setState({alive: monster}, async ()=> {
+          if(this.state.alive === false){
+            this.setState({imgSrc: "https://media.giphy.com/media/jq0OxVeZObXBDltWKO/giphy-downsized-large.gif" })
+          }
+        })
+        });
         return;
       }
     } catch (error) {
       console.log('Error occurred while checking for existing user', error);
     }
-  
+
+   
     // If the user doesn't exist, generate the monster image and save it to the database
     const encodedParams = new URLSearchParams();
     encodedParams.append("prompt", `${monsterStyle}, full body monster, highly-detailed masterpiece trending HQ,  in the style of GooseBumps`);
@@ -78,28 +90,38 @@ class App extends React.Component {
     } catch (error) {
       console.log('Error occurred while generating image', error);
     }
+    
+   
+
+
   }
 
+
+
   render() {
-    const { imageSrc } = this.state
-    const { isButtonClicked } = this.state
-    const { userName } = this.props
+    const { imageSrc, isButtonClicked, alive } = this.state;
+    const { userName } = this.props;
+    console.log('test', this.state)
     return (
       <div>
-      
         <h1>Welcome to Monster Feeder</h1>
-        
-       
         <div id="imageborder">
-        {isButtonClicked ? null : (
-            <button id="summonbutton" onClick={this.generateImage}>Summon Your Monster</button>
+          {isButtonClicked ? null : (
+            <button id="summonbutton" onClick={this.generateImage}>
+              Summon Your Monster
+            </button>
           )}
-        <img src={imageSrc} id="my-image"/>
+          <img
+  src={imageSrc}
+  id="my-image"
+/>
         </div>
-        <Timer userName={userName}></Timer>
+        <Timer userName={userName} />
       </div>
     );
   }
+
+
 }
 
 export default App;
