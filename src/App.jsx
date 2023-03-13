@@ -125,7 +125,7 @@ componentDidMount() {
         <div>
           <h1 id='deadalert'>YOUR MONSTER DIED!!!!</h1>
           <img
-            src="https://media.giphy.com/media/jq0OxVeZObXBDltWKO/giphy-downsized-large.gif"
+            src="https://media.giphy.com/media/ridEUCekvxvQ4/giphy.gif"
             id="deadimage"
           />
           <Timer userName={userName} />
